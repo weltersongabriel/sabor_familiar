@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#3B1F14"/>
+  <!-- Gradient overlay -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B1F14;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5A2E1B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B1F14;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D9A441;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D9A441;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decorative elements -->
+  <circle cx="200" cy="150" r="180" fill="#D9A441" opacity="0.1"/>
+  <circle cx="1000" cy="480" r="200" fill="#C8442B" opacity="0.1"/>
+  <circle cx="600" cy="315" r="300" fill="#D9A441" opacity="0.05"/>
+
+  <!-- Logo area -->
+  <circle cx="200" cy="180" r="70" fill="#3B1F14"/>
+  <circle cx="200" cy="180" r="60" fill="#FFF4E0"/>
+  <text x="200" y="200" font-family="cursive, serif" font-size="72" font-weight="bold" fill="#3B1F14" text-anchor="middle" dominant-baseline="middle">SF</text>
+
+  <!-- Main title -->
+  <text x="600" y="250" font-family="cursive, serif" font-size="64" font-weight="bold" fill="#FFF4E0" text-anchor="middle" dominant-baseline="middle">Sabor Familiar</text>
+
+  <!-- Slogan -->
+  <text x="600" y="330" font-family="Georgia, serif" font-size="28" fill="#D9A441" text-anchor="middle" dominant-baseline="middle">Feito com amor para sua família</text>
+
+  <!-- Divider -->
+  <line x1="500" y1="360" x2="700" y2="360" stroke="url(#goldGrad)" stroke-width="3"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="400" font-family="system-ui, sans-serif" font-size="22" fill="#FFE8C1" text-anchor="middle" dominant-baseline="middle">Salgados artesanais • Buffet para eventos • Encomendas pelo WhatsApp</text>
+
+  <!-- Food icons row -->
+  <g font-size="48" text-anchor="middle" dominant-baseline="middle">
+    <text x="350" y="500" fill="#FFF4E0" opacity="0.8">🍟</text>
+    <text x="450" y="500" fill="#FFF4E0" opacity="0.8">🥧</text>
+    <text x="550" y="500" fill="#FFF4E0" opacity="0.8">🥟</text>
+    <text x="650" y="500" fill="#FFF4E0" opacity="0.8">🍰</text>
+    <text x="750" y="500" fill="#FFF4E0" opacity="0.8">🥤</text>
+    <text x="850" y="500" fill="#FFF4E0" opacity="0.8">📦</text>
+  </g>
+
+  <!-- WhatsApp CTA -->
+  <rect x="450" y="540" width="300" height="50" rx="25" fill="#25D366"/>
+  <text x="600" y="568" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Pedir pelo WhatsApp</text>
+</svg>

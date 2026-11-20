@@ -1,0 +1,524 @@
+@import "tailwindcss";
+
+/* Sabor Familiar - Custom Theme */
+@theme {
+  /* Colors extracted from logo */
+  --color-chocolate-900: #2a150d;
+  --color-chocolate-800: #3b1f14;
+  --color-chocolate-700: #4a281a;
+  --color-chocolate-600: #5a2e1b;
+  --color-chocolate-500: #6b3820;
+  --color-chocolate-400: #8b4a2e;
+  --color-chocolate-300: #ab6845;
+  --color-chocolate-200: #c98b6d;
+  --color-chocolate-100: #e8b59e;
+
+  --color-cream-50: #fffefb;
+  --color-cream-100: #fff4e0;
+  --color-cream-200: #ffe8c1;
+  --color-cream-300: #ffdba0;
+  --color-cream-400: #ffcc7a;
+
+  --color-gold-400: #d9a441;
+  --color-gold-500: #c49238;
+  --color-gold-600: #a87d2f;
+  --color-gold-700: #8a6426;
+
+  --color-warm-red-500: #c8442b;
+  --color-warm-red-600: #a83824;
+  --color-warm-red-700: #882e1d;
+
+  /* Typography */
+  --font-cursive: "Pacifico", "Lobster Two", "Yellowtail", cursive;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Poppins", "Nunito", system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-warm: 0 4px 20px -4px rgba(59, 31, 20, 0.4);
+  --shadow-warm-lg: 0 10px 40px -8px rgba(59, 31, 20, 0.5);
+  --shadow-gold: 0 4px 20px -4px rgba(217, 164, 65, 0.4);
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  /* Border radius */
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-cream-50);
+  color: var(--color-chocolate-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Font loading optimization */
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/pacifico/v21/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Lobster Two';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lobstertwo/v16/92zAze5uucH49zTLN6M07UpHe44.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtXK.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfedw.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+}
+
+/* Custom utility classes - using regular CSS */
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--color-gold-400);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-chocolate-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-chocolate-500);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-gold-400);
+  color: var(--color-chocolate-900);
+}
+
+/* Animation keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s var(--transition-smooth) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s var(--transition-smooth) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s var(--transition-smooth) forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Button base styles - regular CSS composing Tailwind utilities */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-gold-400);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--color-warm-red-500);
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 0 0 rgba(200, 68, 43, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-warm-red-600);
+}
+
+.btn-primary:active {
+  background-color: var(--color-warm-red-700);
+}
+
+.btn-primary:focus-visible {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 0 3px rgba(200, 68, 43, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--color-chocolate-800);
+  color: var(--color-cream-100);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-chocolate-700);
+}
+
+.btn-secondary:active {
+  background-color: var(--color-chocolate-600);
+}
+
+.btn-secondary:focus-visible {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 0 3px rgba(90, 46, 27, 0.3);
+}
+
+.btn-gold {
+  background-color: var(--color-gold-500);
+  color: var(--color-chocolate-900);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 0 0 rgba(217, 164, 65, 0.3);
+}
+
+.btn-gold:hover {
+  background-color: var(--color-gold-400);
+}
+
+.btn-gold:active {
+  background-color: var(--color-gold-600);
+}
+
+.btn-gold:focus-visible {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 0 3px rgba(217, 164, 65, 0.3);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-chocolate-600);
+  color: var(--color-chocolate-700);
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-chocolate-50);
+}
+
+.btn-outline:active {
+  background-color: var(--color-chocolate-100);
+}
+
+.btn-outline:focus-visible {
+  box-shadow: 0 0 0 3px rgba(139, 74, 46, 0.3);
+}
+
+.btn-ghost {
+  color: var(--color-chocolate-700);
+  background-color: transparent;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-chocolate-100);
+}
+
+.btn-ghost:active {
+  background-color: var(--color-chocolate-200);
+}
+
+.btn-ghost:focus-visible {
+  box-shadow: 0 0 0 3px rgba(139, 74, 46, 0.3);
+}
+
+/* Card base styles */
+.card {
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-warm);
+  transform: translateY(-2px);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-chocolate-200);
+  background-color: white;
+  color: var(--color-chocolate-800);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--color-chocolate-400);
+}
+
+.input:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--color-gold-400);
+}
+
+.input-error {
+  border-color: var(--color-warm-red-500);
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 2px var(--color-warm-red-500);
+}
+
+.input:disabled {
+  background-color: var(--color-chocolate-50);
+  cursor: not-allowed;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-chocolate-700);
+  margin-bottom: 0.5rem;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badge-gold {
+  background-color: var(--color-gold-100);
+  color: var(--color-gold-700);
+}
+
+.badge-chocolate {
+  background-color: var(--color-chocolate-100);
+  color: var(--color-chocolate-700);
+}
+
+.badge-warm {
+  background-color: var(--color-warm-red-100);
+  color: var(--color-warm-red-700);
+}
+
+/* Container */
+.container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section spacing */
+.section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Gold divider */
+.divider-gold {
+  width: 6rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, transparent, var(--color-gold-400), transparent);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Text gradient */
+.text-gradient-gold {
+  background: linear-gradient(to right, var(--color-gold-500), var(--color-gold-400), #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(to right, var(--color-warm-red-500), #f97316, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe area bottom for mobile */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
