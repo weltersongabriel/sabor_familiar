@@ -12,7 +12,7 @@ import QuantityControl from '../ui/QuantityControl';
 import Textarea from '../ui/Textarea';
 
 export default function Cardapio() {
-  const { addItem, itemCount } = useCart();
+  const { addItem, items, updateQuantity, removeItem, itemCount, openCart, subtotal, formatPrice: formatCartPrice } = useCart();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -189,6 +189,9 @@ export default function Cardapio() {
                     }}
                     formatPrice={formatPrice}
                     getUnitLabel={getUnitLabel}
+                    cartItems={items}
+                    onUpdateQuantity={updateQuantity}
+                    onRemoveItem={removeItem}
                   />
                 </motion.li>
               ))}
@@ -209,8 +212,8 @@ export default function Cardapio() {
                 {itemCount} {itemCount === 1 ? 'item' : 'itens'} no carrinho
               </p>
             </div>
-            <Button variant="primary" size="lg" onClick={() => document.getElementById('cart-drawer')?.focus()} className="w-full sm:w-auto">
-              Ver Carrinho
+            <Button variant="primary" size="lg" onClick={openCart} className="w-full sm:w-auto">
+              Ver Carrinho · {formatCartPrice(subtotal)}
             </Button>
           </div>
         </motion.div>
@@ -308,25 +311,20 @@ export default function Cardapio() {
 }
 
 // Product Card Component
-function ProductCard({ product, onQuickAdd, onDetailClick, formatPrice, getUnitLabel }) {
-  const [showQuantity, setShowQuantity] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+function ProductCard({ product, onQuickAdd, onDetailClick, formatPrice, getUnitLabel, cartItems, onUpdateQuantity, onRemoveItem }) {
+  const cartItem = cartItems.find((item) => item.id === product.id && !item.notes);
+  const quantity = cartItem?.quantity || 0;
 
-  // Check if item is in cart (simplified - would need cart context)
-  // For now, we'll use local state for demo
-
-  const handleAdd = (e) => {
-    e.stopPropagation();
-    setShowQuantity(true);
-    setQuantity(1);
+  const handleIncrement = () => {
+    if (cartItem) onUpdateQuantity(product.id, '', cartItem.quantity + 1);
   };
 
-  const handleIncrement = () => setQuantity(q => q + 1);
   const handleDecrement = () => {
-    if (quantity > 1) setQuantity(q => q - 1);
-    else {
-      setShowQuantity(false);
-      onQuickAdd(product);
+    if (!cartItem) return;
+    if (cartItem.quantity > 1) {
+      onUpdateQuantity(product.id, '', cartItem.quantity - 1);
+    } else {
+      onRemoveItem(product.id, '');
     }
   };
 
@@ -348,10 +346,13 @@ function ProductCard({ product, onQuickAdd, onDetailClick, formatPrice, getUnitL
           </div>
         )}
         {/* Quick add button overlay */}
-        {!showQuantity && (
-          <div className="absolute inset-0 bg-chocolate-900/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        {quantity === 0 && (
+          <div className="absolute inset-0 bg-chocolate-900/40 lg:bg-chocolate-900/50 flex items-center justify-end p-3 lg:items-center lg:justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
             <motion.button
-              onClick={handleAdd}
+              onClick={(e) => {
+                e.stopPropagation();
+                onQuickAdd(product);
+              }}
               className="w-14 h-14 rounded-full bg-white text-chocolate-800 font-bold text-2xl shadow-warm-lg hover:bg-cream-100 transition-colors"
               whileTap={{ scale: 0.9 }}
               aria-label={`Adicionar ${product.name} ao pedido`}
@@ -378,7 +379,7 @@ function ProductCard({ product, onQuickAdd, onDetailClick, formatPrice, getUnitL
 
           {/* Quantity control when added */}
           <AnimatePresence>
-            {showQuantity && (
+            {quantity > 0 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

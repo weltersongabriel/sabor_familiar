@@ -1,8 +1,7 @@
-// Sabor Familiar - Hero Section
+// Sabor Familiar - Hero Section (Enhanced with FoodWagon-style search)
+// Inspired by FoodWagon's hero with tabbed Delivery/Pickup search
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiHeart, FiTruck, FiShield, FiAward } from 'react-icons/fi';
-import { CONFIG } from '../../config';
-import Button from '../ui/Button';
 
 export default function Hero() {
   const scrollToSection = (href) => {
@@ -10,6 +9,11 @@ export default function Hero() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    scrollToSection('#cardapio');
   };
 
   const features = [
@@ -32,7 +36,7 @@ export default function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gold-500/5 to-transparent rounded-full blur-3xl" />
       </div>
 
-      {/* Food collage background - inspired by pizza model */}
+      {/* Food collage background */}
       <div className="absolute inset-0 opacity-10" aria-hidden="true">
         <div className="absolute top-20 left-10 w-64 h-64">
           <img
@@ -96,7 +100,7 @@ export default function Hero() {
       {/* Content */}
       <div className="container relative py-20 lg:py-32 z-10">
         <motion.div
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -126,7 +130,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg sm:text-xl text-chocolate-100 leading-relaxed mb-10 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl text-chocolate-100 leading-relaxed mb-10 max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -135,39 +139,30 @@ export default function Hero() {
             Três gerações de receitas da vó Maria, ingredientes frescos da feira e o tempero que abraça.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Search Box - FoodWagon Style */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="bg-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-6 border border-white/10 shadow-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => scrollToSection('#cardapio')}
-              rightIcon={<FiArrowRight className="w-5 h-5" aria-hidden="true" />}
-              className="w-full sm:w-auto"
+            {/* Search Button */}
+            <button
+              type="submit"
+              onClick={handleSearch}
+              className="w-full py-4 rounded-2xl bg-warm-red-500 text-white font-semibold text-lg hover:bg-warm-red-600 transition-colors flex items-center justify-center gap-3 shadow-warm"
             >
-              Fazer Encomenda
-            </Button>
-            <Button
-              variant="gold"
-              size="lg"
-              onClick={() => scrollToSection('#eventos')}
-              rightIcon={<FiArrowRight className="w-5 h-5" aria-hidden="true" />}
-              className="w-full sm:w-auto"
-            >
-              Orçamento para Eventos
-            </Button>
+              <span>Buscar Salgados</span>
+              <FiArrowRight className="w-5 h-5" aria-hidden="true" />
+            </button>
           </motion.div>
 
           {/* Trust Features */}
           <motion.div
-            className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm sm:text-base text-chocolate-100"
+            className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm sm:text-base text-chocolate-100 mt-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
           >
             {features.map((feature, index) => (
               <motion.div
@@ -175,7 +170,7 @@ export default function Hero() {
                 className="flex items-center gap-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
               >
                 <feature.icon className={`w-5 h-5 ${feature.color}`} aria-hidden="true" />
                 <span className="font-medium">{feature.label}</span>

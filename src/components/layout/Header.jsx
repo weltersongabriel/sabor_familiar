@@ -54,11 +54,11 @@ export default function Header() {
             className="flex items-center gap-2 lg:gap-3 text-chocolate-800 hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 rounded-xl"
             aria-label={`${CONFIG.business.name} - Início`}
           >
-            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-chocolate-800 flex items-center justify-center shadow-warm">
-              <span className="font-cursive text-cream-100 text-xl lg:text-2xl font-bold">
-                SF
-              </span>
-            </div>
+            <img
+              src="/sabor-logo.png"
+              alt=""
+              className="w-12 h-12 lg:w-14 lg:h-14 object-contain"
+            />
             <div className="hidden sm:block">
               <span className="font-cursive text-lg lg:text-xl text-chocolate-800">
                 {CONFIG.business.name}

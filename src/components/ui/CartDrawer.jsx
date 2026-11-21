@@ -1,6 +1,6 @@
 // Sabor Familiar - Cart Drawer Component
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiX, FiTrash2, FiTruck, FiPackage, FiMapPin, FiClock } from 'react-icons/fi';
 import { CONFIG } from '../../config';
 import { useCart } from '../../context/CartContext';
@@ -29,6 +29,16 @@ export default function CartDrawer() {
   } = useCart();
 
   const drawerRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    const handleChange = (event) => setIsDesktop(event.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Focus management
   useEffect(() => {
@@ -106,10 +116,10 @@ export default function CartDrawer() {
         <motion.div
           ref={drawerRef}
           tabIndex={-1}
-          className="w-full max-w-md h-full max-h-[90vh] bg-white rounded-t-3xl shadow-warm-lg flex flex-col overflow-hidden"
-          initial={{ x: '100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '100%' }}
+          className="w-full h-[90vh] max-h-[90vh] bg-white rounded-t-3xl shadow-warm-lg flex flex-col overflow-hidden md:absolute md:right-0 md:top-0 md:w-[460px] md:h-full md:max-h-full md:rounded-none md:rounded-l-3xl"
+          initial={isDesktop ? { x: '100%' } : { y: '100%' }}
+          animate={{ x: 0, y: 0 }}
+          exit={isDesktop ? { x: '100%' } : { y: '100%' }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
         >
