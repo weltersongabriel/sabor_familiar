@@ -1,10 +1,8 @@
 // Sabor Familiar - Footer Component
-// Enhanced with city directory inspired by FoodWagon
 import { motion } from 'framer-motion';
-import { FiHeart, FiMapPin, FiPhone, FiMail, FiClock, FiChevronDown } from 'react-icons/fi';
-import { FaGithub, FaLinkedin, FaGlobe, FaInstagram, FaPhone } from 'react-icons/fa';
+import { FiHeart, FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
+import { FaGithub, FaLinkedin, FaGlobe, FaInstagram } from 'react-icons/fa';
 import { CONFIG } from '../../config';
-import { CITIES } from '../../data/promos';
 import FloatingWhatsApp from '../ui/FloatingWhatsApp';
 
 export default function Footer() {
@@ -18,27 +16,20 @@ export default function Footer() {
     { href: '#contato', label: 'Contato' },
   ];
 
-  // Group cities into columns for the directory
-  const citiesPerColumn = Math.ceil(CITIES.length / 6);
-  const cityColumns = [];
-  for (let i = 0; i < CITIES.length; i += citiesPerColumn) {
-    cityColumns.push(CITIES.slice(i, i + citiesPerColumn));
-  }
-
   return (
     <>
       <FloatingWhatsApp />
 
-      <footer className="bg-chocolate-900 text-cream-100 relative overflow-hidden" role="contentinfo">
+      <footer className="bg-chocolate-800 text-cream-100 relative overflow-hidden" role="contentinfo">
         {/* Decorative background */}
         <div className="absolute inset-0 opacity-5" aria-hidden="true">
           <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-warm-red-500 rounded-full blur-3xl" />
         </div>
 
-        <div className="container relative py-16 lg:py-24">
+        <div className="container relative py-12 lg:py-16">
           {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
             {/* Brand */}
             <motion.div
               className="lg:col-span-1"
@@ -60,14 +51,14 @@ export default function Footer() {
               </a>
               <p className="text-chocolate-200 text-sm leading-relaxed mb-6 max-w-xs">
                 Salgados artesanais feitos com receitas de família, ingredientes frescos e muito carinho.
-                Atendemos encomendas e eventos em toda São Paulo.
+                Atendemos encomendas e eventos em São Paulo.
               </p>
               <div className="flex items-center gap-4">
                 <a
                   href={`https://instagram.com/${CONFIG.business.instagram.replace('@', '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-xl bg-chocolate-800 text-chocolate-200 hover:bg-gold-500 hover:text-chocolate-900 transition-colors"
+                  className="p-2 rounded-xl bg-chocolate-700 text-chocolate-200 hover:bg-gold-500 hover:text-chocolate-900 transition-colors"
                   aria-label="Instagram"
                 >
                   <FaInstagram className="w-5 h-5" aria-hidden="true" />
@@ -76,7 +67,7 @@ export default function Footer() {
                   href={`https://wa.me/${CONFIG.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-xl bg-chocolate-800 text-chocolate-200 hover:bg-green-500 hover:text-chocolate-900 transition-colors"
+                  className="p-2 rounded-xl bg-chocolate-700 text-chocolate-200 hover:bg-green-500 hover:text-chocolate-900 transition-colors"
                   aria-label="WhatsApp"
                 >
                   <FiPhone className="w-5 h-5" aria-hidden="true" />
@@ -176,7 +167,7 @@ export default function Footer() {
                 </div>
               </dl>
 
-              <div className="border-t border-chocolate-700 pt-6">
+              <div className="border-t border-chocolate-600 pt-6">
                 <p className="text-chocolate-300 text-xs mb-3">Desenvolvido com carinho por</p>
                 <a
                   href={CONFIG.developer.portfolio}
@@ -205,47 +196,13 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          {/* City Directory - Inspired by FoodWagon */}
-          <motion.div
-            className="mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-lg text-gold-400">Atendemos em toda a região</h3>
-              <button
-                className="flex items-center gap-1 text-sm text-chocolate-300 hover:text-gold-400 transition-colors"
-                aria-label="Ver todas as cidades"
-              >
-                Ver todas
-                <FiChevronDown className="w-4 h-4" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-              {cityColumns.flat().slice(0, 30).map((city) => (
-                <a
-                  key={city}
-                  href={`#cardapio?city=${encodeURIComponent(city)}`}
-                  className="text-chocolate-200 hover:text-gold-400 transition-colors text-sm py-2 px-3 rounded-xl hover:bg-chocolate-800/50 text-center"
-                >
-                  {city}
-                </a>
-              ))}
-            </div>
-            <p className="text-chocolate-500 text-xs text-center mt-4">
-              +{CITIES.length - 30} outras cidades da Grande São Paulo e interior
-            </p>
-          </motion.div>
-
           {/* Bottom Bar */}
           <motion.div
-            className="mt-12 pt-8 border-t border-chocolate-700 flex flex-col md:flex-row items-center justify-between gap-4"
+            className="mt-8 pt-8 border-t border-chocolate-600 flex flex-col md:flex-row items-center justify-between gap-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
             <p className="text-chocolate-400 text-sm text-center md:text-left">
               © {currentYear} {CONFIG.business.name}. Todos os direitos reservados.

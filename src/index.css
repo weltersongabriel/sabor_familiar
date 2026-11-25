@@ -2,22 +2,22 @@
 
 /* Sabor Familiar - Custom Theme */
 @theme {
-  /* Colors extracted from logo */
-  --color-chocolate-900: #2a150d;
-  --color-chocolate-800: #3b1f14;
-  --color-chocolate-700: #4a281a;
-  --color-chocolate-600: #5a2e1b;
-  --color-chocolate-500: #6b3820;
-  --color-chocolate-400: #8b4a2e;
-  --color-chocolate-300: #ab6845;
-  --color-chocolate-200: #c98b6d;
-  --color-chocolate-100: #e8b59e;
+  /* Colors extracted from logo - MAIS CLAROS */
+  --color-chocolate-900: #4a3428;
+  --color-chocolate-800: #5c4030;
+  --color-chocolate-700: #6d4d39;
+  --color-chocolate-600: #805a43;
+  --color-chocolate-500: #956950;
+  --color-chocolate-400: #aa7a62;
+  --color-chocolate-300: #c08d76;
+  --color-chocolate-200: #d6a38c;
+  --color-chocolate-100: #ebbaa5;
 
-  --color-cream-50: #fffefb;
-  --color-cream-100: #fff4e0;
-  --color-cream-200: #ffe8c1;
-  --color-cream-300: #ffdba0;
-  --color-cream-400: #ffcc7a;
+  --color-cream-50: #fefdf8;
+  --color-cream-100: #fdf6e8;
+  --color-cream-200: #faebd0;
+  --color-cream-300: #f6deb3;
+  --color-cream-400: #f2d095;
 
   --color-gold-400: #d9a441;
   --color-gold-500: #c49238;

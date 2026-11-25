@@ -1,5 +1,5 @@
 // Sabor Familiar - Floating Cart Button (Desktop)
-// Botão flutuante que mostra itens e total, abre o drawer
+// Botão flutuante que mostra itens e total, abre a página do carrinho
 import { motion } from 'framer-motion';
 import { FiShoppingBag, FiX } from 'react-icons/fi';
 import { useCart } from '../../context/CartContext';
@@ -7,8 +7,8 @@ import { useCart } from '../../context/CartContext';
 const ORANGE = '#E07020';
 const ORANGE_HOVER = '#d0651a';
 
-export default function FloatingCartButton() {
-  const { itemCount, total, openCart, closeCart, formatPrice, isOpen } = useCart();
+export default function FloatingCartButton({ onClick }) {
+  const { itemCount, total, formatPrice } = useCart();
 
   if (itemCount === 0) return null;
 
@@ -20,14 +20,14 @@ export default function FloatingCartButton() {
       transition={{ type: 'spring', damping: 15, stiffness: 200, delay: 0.3 }}
     >
       <motion.button
-        onClick={isOpen ? closeCart : openCart}
+        onClick={onClick}
         className="flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-warm-lg shadow-[#E07020]/40 transition-all duration-300"
         style={{ backgroundColor: ORANGE }}
         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = ORANGE_HOVER; }}
         onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = ORANGE; }}
         whileHover={{ scale: 1.03, boxShadow: '0 12px 40px -8px rgba(224, 112, 32, 0.5)' }}
         whileTap={{ scale: 0.97 }}
-        aria-label={isOpen ? 'Fechar carrinho' : `Abrir carrinho: ${itemCount} itens, total ${formatPrice(total)}`}
+        aria-label={`Ver pedido: ${itemCount} itens, total ${formatPrice(total)}`}
       >
         <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
           <FiShoppingBag className="w-5 h-5 text-white" aria-hidden="true" />
@@ -39,13 +39,9 @@ export default function FloatingCartButton() {
           <p className="text-white font-bold text-lg">{formatPrice(total)}</p>
         </div>
         <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-          {isOpen ? (
-            <FiX className="w-4 h-4" aria-hidden="true" />
-          ) : (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          )}
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
         </div>
       </motion.button>
 

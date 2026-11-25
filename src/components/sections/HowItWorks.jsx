@@ -1,7 +1,30 @@
 // Sabor Familiar - How It Works Component
-// Inspired by FoodWagon's "How does it work" 4-step process
+// Apenas 3 passos: Escolha, Personalize, Finalize
 import { motion } from 'framer-motion';
-import { HOW_IT_WORKS } from '../../data/promos';
+
+const HOW_IT_WORKS = [
+  {
+    step: 1,
+    title: 'Escolha',
+    description: 'Navegue pelo cardápio e selecione seus salgados favoritos',
+    icon: '🛒',
+    color: 'from-amber-400 to-orange-500',
+  },
+  {
+    step: 2,
+    title: 'Personalize',
+    description: 'Ajuste quantidades, adicione observações de preparo',
+    icon: '✏️',
+    color: 'from-pink-400 to-rose-500',
+  },
+  {
+    step: 3,
+    title: 'Finalize',
+    description: 'Revise o pedido e envie pelo WhatsApp',
+    icon: '📱',
+    color: 'from-blue-400 to-cyan-500',
+  },
+];
 
 export default function HowItWorks() {
   return (
@@ -21,17 +44,17 @@ export default function HowItWorks() {
             Encomendar nunca foi tão fácil
           </h2>
           <p className="text-chocolate-600 text-lg">
-            Em 4 passos simples, seus salgados favoritos chegam fresquinhos na sua mesa.
+            Em 3 passos simples, seus salgados favoritos chegam fresquinhos na sua mesa.
           </p>
         </motion.div>
 
-        {/* Steps Grid */}
+        {/* Steps Grid - 3 colunas */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
             {HOW_IT_WORKS.map((step, index) => (
               <motion.article
                 key={step.step}
@@ -43,10 +66,10 @@ export default function HowItWorks() {
               >
                 {/* Step Number Circle */}
                 <div className="relative w-20 h-20 mx-auto mb-6">
-                  <div className={`absolute inset-0 rounded-full ${step.color} flex items-center justify-center`}>
+                  <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center`}>
                     <span className="font-cursive text-3xl text-cream-100">{step.step}</span>
                   </div>
-                  {/* Connecting line */}
+                  {/* Connecting line - apenas entre 1-2 e 2-3 */}
                   {index < HOW_IT_WORKS.length - 1 && (
                     <div className="absolute top-10 left-1/2 w-full h-1 bg-gold-200" aria-hidden="true" />
                   )}
@@ -84,25 +107,6 @@ export default function HowItWorks() {
               </motion.article>
             ))}
           </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-chocolate-600 mb-4">Pronto para fazer seu pedido?</p>
-          <a
-            href="#cardapio"
-            className="inline-flex items-center gap-2 text-gold-600 hover:text-gold-700 font-medium transition-colors"
-          >
-            Ver Cardápio
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
         </motion.div>
       </div>
     </section>

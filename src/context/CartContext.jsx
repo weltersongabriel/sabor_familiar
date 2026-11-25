@@ -159,7 +159,7 @@ export function CartProvider({ children }) {
   // Action creators
   const addItem = useCallback((product, quantity = 1, notes = '') => {
     dispatch({ type: ACTIONS.ADD_ITEM, payload: { product, quantity, notes } });
-    dispatch({ type: ACTIONS.OPEN_CART });
+    // Não abre mais o drawer automaticamente - componentes decidem quando abrir
   }, []);
 
   const removeItem = useCallback((id, notes = '') => {

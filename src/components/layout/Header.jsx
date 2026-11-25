@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { href: '#contato', label: 'Contato' },
 ];
 
-export default function Header() {
+export default function Header({ onOpenCartPage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { itemCount, total, openCart } = useCart();
@@ -33,6 +33,16 @@ export default function Header() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  // Handler for cart - opens CartPage on mobile, drawer on desktop
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    if (onOpenCartPage) {
+      onOpenCartPage();
+    } else {
+      openCart();
+    }
   };
 
   return (
@@ -85,9 +95,9 @@ export default function Header() {
               </a>
             ))}
 
-            {/* Cart Button Desktop */}
+            {/* Cart Button Desktop - opens CartPage */}
             <button
-              onClick={openCart}
+              onClick={handleCartClick}
               className="relative p-2 rounded-xl text-chocolate-600 hover:bg-chocolate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"
               aria-label={`Carrinho: ${itemCount} itens, total ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}`}
             >
@@ -147,13 +157,13 @@ export default function Header() {
                   </a>
                 ))}
 
-                {/* Cart Button Mobile */}
+                {/* Cart Button Mobile - opens CartPage */}
                 <button
-                  onClick={openCart}
+                  onClick={handleCartClick}
                   className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-chocolate-800 text-cream-100 font-medium hover:bg-chocolate-700 transition-colors"
                 >
                   <FiShoppingCart className="w-5 h-5" aria-hidden="true" />
-                  <span>Ver Carrinho</span>
+                  <span>Ver Pedido</span>
                   {itemCount > 0 && (
                     <motion.span
                       className="w-6 h-6 bg-warm-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center"

@@ -25,19 +25,19 @@ export default function Hero() {
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden" aria-labelledby="hero-title">
-      {/* Background */}
-      <div className="absolute inset-0 bg-chocolate-900" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-br from-chocolate-800 via-chocolate-900 to-chocolate-900" aria-hidden="true" />
+      {/* Background - MAIS CLARO */}
+      <div className="absolute inset-0 bg-cream-100" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-cream-100 via-cream-50 to-cream-100" aria-hidden="true" />
 
-      {/* Decorative elements */}
+      {/* Decorative elements - mais sutis */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-warm-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gold-500/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-warm-red-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-gold-500/3 to-transparent rounded-full blur-3xl" />
       </div>
 
-      {/* Food collage background */}
-      <div className="absolute inset-0 opacity-10" aria-hidden="true">
+      {/* Food collage background - SALGADOS DISCRETOS */}
+      <div className="absolute inset-0 opacity-3" aria-hidden="true">
         <div className="absolute top-20 left-10 w-64 h-64">
           <img
             src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=400&h=400&fit=crop"
@@ -48,7 +48,7 @@ export default function Hero() {
         </div>
         <div className="absolute top-1/3 right-20 w-56 h-56">
           <img
-            src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=400&fit=crop"
+            src="https://images.unsplash.com/photo-1626799629272-22f3d3c3e5a0?w=400&h=400&fit=crop"
             alt=""
             className="w-full h-full object-cover rounded-2xl"
             loading="lazy"
@@ -72,12 +72,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Floating decorative shapes */}
+      {/* Floating decorative shapes - mais sutis */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {[1, 2, 3, 4, 5].map((i) => (
           <motion.div
             key={i}
-            className="absolute w-4 h-4 bg-gold-400/30 rounded-full"
+            className="absolute w-4 h-4 bg-gold-400/10 rounded-full"
             style={{
               top: `${15 + i * 15}%`,
               left: `${5 + i * 18}%`,
@@ -85,7 +85,7 @@ export default function Hero() {
             animate={{
               y: [0, -20, 0],
               x: [0, 10, 0],
-              opacity: [0.3, 0.6, 0.3],
+              opacity: [0.2, 0.4, 0.2],
             }}
             transition={{
               duration: 4 + i,
@@ -107,7 +107,7 @@ export default function Hero() {
         >
           {/* Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-cream-100 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-chocolate-100 border border-chocolate-200 text-chocolate-700 text-sm font-medium mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -119,7 +119,7 @@ export default function Hero() {
           {/* Main Title */}
           <motion.h1
             id="hero-title"
-            className="font-cursive text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-cream-100 leading-tight mb-6"
+            className="font-cursive text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-chocolate-800 leading-tight mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
@@ -130,18 +130,17 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg sm:text-xl text-chocolate-100 leading-relaxed mb-10 max-w-2xl"
+            className="text-lg sm:text-xl text-chocolate-600 leading-relaxed mb-10 max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            Salgados artesanais, doces caseiros e buffet completo para seus momentos especiais.
-            Três gerações de receitas da vó Maria, ingredientes frescos da feira e o tempero que abraça.
+            Salgados artesanais feitos no dia com ingredientes da feira. Três gerações de receitas da vó Maria, o tempero que abraça.
           </motion.p>
 
           {/* Search Box - FoodWagon Style */}
           <motion.div
-            className="bg-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-6 border border-white/10 shadow-2xl"
+            className="bg-white/80 backdrop-blur-xl rounded-3xl p-4 sm:p-6 border border-chocolate-200 shadow-xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
@@ -152,14 +151,14 @@ export default function Hero() {
               onClick={handleSearch}
               className="w-full py-4 rounded-2xl bg-warm-red-500 text-white font-semibold text-lg hover:bg-warm-red-600 transition-colors flex items-center justify-center gap-3 shadow-warm"
             >
-              <span>Buscar Salgados</span>
+              <span>Ver Cardápio e Encomendar</span>
               <FiArrowRight className="w-5 h-5" aria-hidden="true" />
             </button>
           </motion.div>
 
           {/* Trust Features */}
           <motion.div
-            className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm sm:text-base text-chocolate-100 mt-10"
+            className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm sm:text-base text-chocolate-600 mt-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7 }}
@@ -181,7 +180,7 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-chocolate-200 animate-bounce"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-chocolate-400 animate-bounce"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}

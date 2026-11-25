@@ -1,6 +1,6 @@
 // Sabor Familiar - Produto Carousel
-// Carrossel horizontal de cards de produto com setas amarelas
-// Apenas salgados (sem busca nem filtros de categoria)
+// Carrossel horizontal de cards de produto - APENAS SALGADOS
+// Visual moderno, melhor usabilidade
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
@@ -12,7 +12,12 @@ const ARROW_COLOR = '#F5B400';
 const ARROW_HOVER = '#e0a100';
 const ARROW_DISABLED = '#e8d5a0';
 
-export default function ProdutoCarousel() {
+// Filtrar apenas salgados (fritos, assados, mini) - sem doces, bebidas, combos
+const SALGADOS_ONLY = SALGADOS.filter(s =>
+  ['fritos', 'assados', 'mini'].includes(s.category)
+);
+
+export default function ProdutoCarousel({ onOpenCartPage }) {
   const { addItem } = useCart();
   const carouselRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -94,7 +99,7 @@ export default function ProdutoCarousel() {
             Nosso Cardápio
           </span>
           <h2 id="cardapio-title" className="font-serif text-3xl sm:text-4xl lg:text-5xl text-chocolate-800 mb-4 font-bold">
-            Feito fresquinho para sua encomenda
+            Salgados feitos fresquinho para sua encomenda
           </h2>
           <p className="text-chocolate-600 text-lg">
             Escolha seus favoritos, ajuste as quantidades e finalize pelo WhatsApp.
@@ -102,9 +107,28 @@ export default function ProdutoCarousel() {
           </p>
         </motion.div>
 
+        {/* Filtros rápidos por categoria */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8" role="group" aria-label="Filtrar por tipo de salgado">
+          {[
+            { id: 'all', label: 'Todos' },
+            { id: 'fritos', label: 'Fritos' },
+            { id: 'assados', label: 'Assados' },
+            { id: 'mini', label: 'Mini (Cento)' },
+          ].map((cat) => (
+            <button
+              key={cat.id}
+              className="px-4 py-2 rounded-full bg-white border border-chocolate-200 text-chocolate-700 text-sm font-medium hover:border-gold-400 hover:text-gold-600 hover:bg-gold-50 transition-all"
+              onClick={() => filterByCategory(cat.id)}
+              aria-pressed={false}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
         {/* Carrossel Horizontal */}
         <div role="list" aria-label="Salgados disponíveis">
-          {SALGADOS.length === 0 ? (
+          {SALGADOS_ONLY.length === 0 ? (
             <motion.div
               className="text-center py-16"
               initial={{ opacity: 0 }}
@@ -138,6 +162,7 @@ export default function ProdutoCarousel() {
               {/* Carrossel Container */}
               <div
                 ref={carouselRef}
+                id="salgaos-carousel"
                 className="relative flex gap-6 overflow-x-auto scrollbar-hide pb-4 lg:pb-0 lg:px-[60px]"
                 role="list"
                 aria-label="Salgados disponíveis"
@@ -147,10 +172,11 @@ export default function ProdutoCarousel() {
                   scrollBehavior: 'smooth',
                 }}
               >
-                {SALGADOS.map((product, index) => (
+                {SALGADOS_ONLY.map((product, index) => (
                   <motion.div
                     key={product.id}
                     data-product-card
+                    data-category={product.category}
                     className="flex-shrink-0 snap-start"
                     style={{ minWidth: '280px', maxWidth: '300px' }}
                     initial={{ opacity: 0, y: 20 }}
@@ -186,7 +212,7 @@ export default function ProdutoCarousel() {
 
               {/* Indicador mobile de scroll */}
               <div className="lg:hidden flex justify-center gap-2 mt-4">
-                {Array.from({ length: Math.max(1, Math.ceil(SALGADOS.length / 1.5)) }, (_, i) => (
+                {Array.from({ length: Math.max(1, Math.ceil(SALGADOS_ONLY.length / 1.5)) }, (_, i) => (
                   <button
                     key={i}
                     onClick={() => {
@@ -210,15 +236,32 @@ export default function ProdutoCarousel() {
         </div>
 
         {/* Barra de carrinho mobile */}
-        <CartBar />
+        <CartBar onOpenCartPage={onOpenCartPage} />
       </div>
     </section>
   );
 }
 
+// Função para filtrar por categoria (simples scroll para a seção)
+function filterByCategory(categoryId) {
+  const carousel = document.getElementById('salgaos-carousel');
+  if (!carousel) return;
+
+  if (categoryId === 'all') {
+    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+    return;
+  }
+
+  // Encontrar primeiro item da categoria
+  const firstItem = carousel.querySelector(`[data-category="${categoryId}"]`);
+  if (firstItem) {
+    firstItem.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+  }
+}
+
 // Barra fixa do carrinho no mobile
-function CartBar() {
-  const { itemCount, total, openCart, formatPrice } = useCart();
+function CartBar({ onOpenCartPage }) {
+  const { itemCount, total, formatPrice } = useCart();
 
   if (itemCount === 0) return null;
 
@@ -241,7 +284,7 @@ function CartBar() {
           </p>
         </div>
         <button
-          onClick={openCart}
+          onClick={onOpenCartPage}
           className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#E07020] text-white font-semibold text-base hover:bg-[#d0651a] active:bg-[#c05a16] transition-colors shadow-lg shadow-[#E07020]/30 flex items-center justify-center gap-2 min-h-[48px]"
         >
           Ver Pedido
